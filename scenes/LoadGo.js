@@ -6,6 +6,7 @@ class LoadGo extends Phaser.Scene {
         // load all assets used in the game
         this.load.path = 'assets/';
         this.load.image('logo', 'badOmenV3.png');
+        this.load.image('bg', 'bg.jpg')
         this.load.image('joint0', 'joint0.png')
         this.load.image('joint1', 'joint1.png')
         this.load.image('bone0', 'bone0.png')

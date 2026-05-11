@@ -1,3 +1,6 @@
+const chosenScreenX = 1080;
+const chosenScreenY = 1920;
+
 class Level1 extends Phaser.Scene {
     constructor() {
         super('lvl1');
@@ -5,6 +8,11 @@ class Level1 extends Phaser.Scene {
     create () {
         // world bounds
         this.matter.world.setBounds();
+
+        // background
+        this.bg = this.add.image(chosenScreenX/2, chosenScreenY/2 - 250, 'bg')
+        .setScale(0.32)
+        .setAlpha(0.5);
 
         // floor / control zone
         this.floor = this.add.rectangle(1080/2, 1920*7/8, 1080, 500, 0x404040, 1).setInteractive();
@@ -20,24 +28,24 @@ class Level1 extends Phaser.Scene {
         // segment0
         this.bone0 = this.matter.add.image(0, 400/2, 'bone0')
             .setScale(0.9)
-            .setRectangle(width['bone0'], length['bone0'], {ignoreGravity: true, mass: 5});
+            .setRectangle(width['bone0'], length['bone0'], {ignoreGravity: true, collisionFilter: {category: 0x0010, mask: 0x0011}, mass: 5});
         this.joint0 = this.matter.add.image(50, 1920*3.5/8, 'joint0')
             .setScale(0.7)
-            .setCircle(radius['joint0'], {isStatic: true});
+            .setCircle(radius['joint0'], {isStatic: true, collisionFilter: {category: 0x0010, mask: 0x0011}});
 
         // segment1
         this.bone1 = this.matter.add.image(0, 400/2, 'bone1')
             .setScale(0.7)
-            .setRectangle(width['bone1'], length['bone1'], {ignoreGravity: true, mass: 5});
+            .setRectangle(width['bone1'], length['bone1'], {ignoreGravity: true, collisionFilter: {category: 0x0100, mask: 0x0101}, mass: 5});
         this.joint1 = this.matter.add.image(0, 0, 'joint1')
             .setScale(0.6)
-            .setCircle(radius['joint1'], {slop: 10});//, ignoreGravity: true, mass: 5});
+            .setCircle(radius['joint1'], {slop: 10, collisionFilter: {category: 0x0001, mask: 0x0111}});//, ignoreGravity: true, mass: 5});
 
         // offset cursor
         this.hand = this.matter.add.image(500, 750, 'hand')
         .setScale(0.5)
-        .setCircle(radius['hand'], {ignoreGravity: true, mass: 5})
-        // .setOnCollide(() =>
+        .setCircle(radius['hand'], {ignoreGravity: true, collisionFilter: {category: 0x0100, mask: 0x0101}, mass: 5})
+        // .setOnCollide((gameObject, ) =>
         // {
         //     this.newConstraint = this.matter.add.constraint();
         // });

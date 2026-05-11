@@ -15,7 +15,7 @@ let config = {
                 y: 5
             },
             debug: {
-                lineThickness: 2,
+                lineThickness: 3,
             }
         }
     },
