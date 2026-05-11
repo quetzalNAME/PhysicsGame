@@ -1,7 +1,7 @@
 let config = {
     parent: 'root',
     type: Phaser.WEBGL,
-    backgroundColor: '#000',
+    backgroundColor: '#222',
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
