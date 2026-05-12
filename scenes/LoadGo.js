@@ -3,18 +3,22 @@ class LoadGo extends Phaser.Scene {
         super('loadgo');
     }
     preload() {
-        // load all assets used in the game
+        // load just the logo
         this.load.path = 'assets/';
         this.load.image('logo', 'badOmenV3.png');
-        this.load.image('bg', 'bg.jpg')
-        this.load.image('joint0', 'joint0.png')
-        this.load.image('joint1', 'joint1.png')
-        this.load.image('bone0', 'bone0.png')
-        this.load.image('bone1', 'bone1.png')
-        this.load.image('hand', 'hand.png')
     }
     create() {
-        
+        // load all assets used in the game
+        // this happens while the logo is playing
+        this.loadingDone = false;
+        this.load.image('bg', 'bg.jpg');
+        this.load.image('joint0', 'joint0.png');
+        this.load.image('joint1', 'joint1.png');
+        this.load.image('bone0', 'bone0.png');
+        this.load.image('bone1', 'bone1.png');
+        this.load.image('hand', 'hand.png')
+        .start();
+
         let logoScale = 0.7;
         let chosenScreenX = 1080;
         let chosenScreenY = 2000;
@@ -72,12 +76,20 @@ class LoadGo extends Phaser.Scene {
             ease: 'Quart.easeInOut',
         });
 
-        this.swap = this.input.keyboard.addKey('SPACE')
+        // skip logo
+        this.skip = this.input.keyboard.addKey('SPACE');
+
+        // make sure loading is done before we switch scenes
+        this.load.once("complete", () => {
+            this.loadingDone = true;
+        });
     }
 
     update(time) {
-        this.scene.start('lvl1');
-        if (time/1000 > 5.5 || Phaser.Input.Keyboard.JustDown(this.swap)) {
+        if (this.loadingDone) {
+            this.scene.start('lvl1');
+        }
+        if ((time/1000 > 5.5 || Phaser.Input.Keyboard.JustDown(this.skip)) && this.loadingDone) {
             this.scene.start('lvl1');
         }
     }
