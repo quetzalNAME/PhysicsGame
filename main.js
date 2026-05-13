@@ -14,9 +14,9 @@ let config = {
             gravity: {
                 y: 5
             },
-            debug: {
-                lineThickness: 3,
-            }
+            // debug: {
+            //     lineThickness: 3,
+            // }
         }
     },
     scene: [LoadGo, Level0, Level1, Level2]

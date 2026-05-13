@@ -18,6 +18,7 @@ class LoadGo extends Phaser.Scene {
         this.load.image('bone0', 'bone0.png');
         this.load.image('bone1', 'bone1.png');
         this.load.image('hand', 'hand.png');
+        this.load.image('crumple', 'crumple.png');
         this.load.image('bat', 'bat.png');
         this.load.image('star', 'star.png')
         .start();
