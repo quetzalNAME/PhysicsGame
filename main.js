@@ -14,12 +14,12 @@ let config = {
             gravity: {
                 y: 5
             },
-            debug: {
-                lineThickness: 4,
-            }
+            // debug: {
+            //     lineThickness: 4,
+            // }
         }
     },
-    scene: [LoadGo, Level1]
+    scene: [LoadGo, Level0, Level1]
 }
 
 let game = new Phaser.Game(config)

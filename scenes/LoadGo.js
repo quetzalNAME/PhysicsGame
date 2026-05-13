@@ -16,12 +16,14 @@ class LoadGo extends Phaser.Scene {
         this.load.image('joint1', 'joint1.png');
         this.load.image('bone0', 'bone0.png');
         this.load.image('bone1', 'bone1.png');
-        this.load.image('hand', 'hand.png')
+        this.load.image('hand', 'hand.png');
+        this.load.image('bat', 'bat.png');
+        this.load.image('star', 'star.png')
         .start();
 
         let logoScale = 0.7;
         let chosenScreenX = 1080;
-        let chosenScreenY = 2000;
+        let chosenScreenY = 1920;
         let logoOffsetX = 0;
 
         this.bg = this.add.rectangle(0, 0, chosenScreenX * 2, chosenScreenY * 2, 0xffffff, 1);
