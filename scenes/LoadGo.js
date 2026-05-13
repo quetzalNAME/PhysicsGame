@@ -1,3 +1,6 @@
+let chosenScreenX = 1080;
+let chosenScreenY = 1920;
+
 class LoadGo extends Phaser.Scene {
     constructor() {
         super('loadgo');
@@ -24,8 +27,6 @@ class LoadGo extends Phaser.Scene {
         .start();
 
         let logoScale = 0.7;
-        let chosenScreenX = 1080;
-        let chosenScreenY = 1920;
         let logoOffsetX = 0;
 
         this.bg = this.add.rectangle(0, 0, chosenScreenX * 2, chosenScreenY * 2, 0xffffff, 1);
@@ -90,11 +91,11 @@ class LoadGo extends Phaser.Scene {
     }
 
     update(time) {
-        if (this.loadingDone) {
-            this.scene.start('lvl2');
-        }
+        // if (this.loadingDone) {
+        //     this.scene.start('lvl0');
+        // }
         if ((time/1000 > 5.5 || Phaser.Input.Keyboard.JustDown(this.skip)) && this.loadingDone) {
-            this.scene.start('lvl1');
+            this.scene.start('lvl0');
         }
     }
 }

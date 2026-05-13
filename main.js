@@ -19,7 +19,7 @@ let config = {
             // }
         }
     },
-    scene: [LoadGo, Level0, Level1, Level2]
+    scene: [LoadGo, Level0, Level1]
 }
 
 let game = new Phaser.Game(config)
