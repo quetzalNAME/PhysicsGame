@@ -13,10 +13,11 @@ class Level0 extends Phaser.Scene {
             .setAlpha(0.5);
 
         // text
+        this.temp = this.add.text(75, 50, '\n\n\n\nThe trackpad translates\nyour movement.', {fontFamily: "Shadows Into Light", fontSize: '100px', lineSpacing: -40, align: 'center'});
         this.add.text(75, 50, 'Collect the stars.', {fontFamily: "Shadows Into Light", fontSize: '150px'});
 
         // floor
-        this.floor = this.add.rectangle(1080/2, 1920*7/8, 1080, 500, 0x404040, 1);
+        this.floor = this.add.rectangle(1080/2, 1920*7/8, 1080, 500, 0x303050, 1);
         let rect = this.matter.add.rectangle(1080/2, 1920*7/8, 1080, 500, {isStatic: true});
 
         // variables
@@ -122,7 +123,7 @@ class Level0 extends Phaser.Scene {
         });
         this.exit.on('pointerup', () =>
         {
-            this.scene.restart();
+            this.scene.start('lvlselect');
         });
         
         // filters
@@ -135,6 +136,7 @@ class Level0 extends Phaser.Scene {
             for (let i = 0; i < 3; i++) {
                 this.stars[i] = this.matter.add.image(0, 450, 'star');
             }
+            this.temp.destroy();
             this.stars[0].x = chosenScreenX/2 - 300;
             this.stars[1].x = chosenScreenX/2;
             this.stars[2].x = chosenScreenX/2 + 300;

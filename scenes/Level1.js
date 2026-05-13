@@ -11,17 +11,17 @@ class Level1 extends Phaser.Scene {
 
         // background
         this.bg = this.add.image(chosenScreenX*3/2, chosenScreenY/2 - 250, 'bg')
-            .setScale(3, 1)
-            .setTint(0x303070, 0xff6666, 0x303070, 0xff6666)
+            .setScale(9, 3)
+            .setTint(0x303070, 0xff6633, 0x303070, 0xff6633)
             .setAlpha(0.5);
 
         // text
         this.add.text(75, 50, 'BATTER UP! ->', {fontFamily: "Shadows Into Light", fontSize: '150px'});
         this.add.text(-2000, 300, '->', {fontFamily: "Shadows Into Light", fontSize: '750px'});
         let dotted_string = '|\n|\n|\n|\n|\n|\n|\n|\n|';
-        this.add.text(2000 + 1100, 0, dotted_string, {fontFamily: "Shadows Into Light", fontSize: '150px'});
-        this.add.text(3000 + 1100, 0, dotted_string, {fontFamily: "Shadows Into Light", fontSize: '150px'});
-        this.add.text(4000 + 1100, 0, dotted_string, {fontFamily: "Shadows Into Light", fontSize: '150px'});
+        this.add.text(5000 + 1100, 0, dotted_string, {fontFamily: "Shadows Into Light", fontSize: '150px'});
+        this.add.text(7500 + 1100, 0, dotted_string, {fontFamily: "Shadows Into Light", fontSize: '150px'});
+        this.add.text(10000 + 1100, 0, dotted_string, {fontFamily: "Shadows Into Light", fontSize: '150px'});
 
         // variables
         let stiff_val = 0.9;
@@ -74,9 +74,9 @@ class Level1 extends Phaser.Scene {
 
         // stars
         this.stars = [];
-        this.stars[0] = this.matter.add.image(2000 + 1100, 450, 'star')
-        this.stars[1] = this.matter.add.image(3000 + 1100, 450, 'star')
-        this.stars[2] = this.matter.add.image(4000 + 1100, 450, 'star')
+        this.stars[0] = this.matter.add.image(5000 + 1100, 450, 'star')
+        this.stars[1] = this.matter.add.image(7500 + 1100, 450, 'star')
+        this.stars[2] = this.matter.add.image(10000 + 1100, 450, 'star')
         for (let i = 0; i < 3; i++) {
             this.stars[i]
                 .setScale(3 * scale)
@@ -91,6 +91,7 @@ class Level1 extends Phaser.Scene {
             .setCollisionCategory(0x1000)
             .setCollidesWith(0x0100)
             .setMass(0.0000001)
+            .setBounce(0.8)
             .setScale(0.5);
 
         this.ball.setOnCollideWith(this.bat, () =>
@@ -131,7 +132,7 @@ class Level1 extends Phaser.Scene {
         {
             this.homerun = null;
             followBall = false;
-            this.scene.restart();
+            this.scene.start('lvlselect');
         });
         
         // filters
@@ -141,17 +142,17 @@ class Level1 extends Phaser.Scene {
     update () {
         this.bat.setAngle(90 * ((this.bat.x - 750)/chosenScreenX));
         if (this.ball.y > chosenScreenY + 100) {
-            if (followBall && this.ball.x >= 2000 + 1100 && this.matter.world.enabled) {
+            if (followBall && this.ball.x >= 5000 + 1100 && this.matter.world.enabled) {
                 this.stars[0].x = this.cameras.main.scrollX + chosenScreenX/2 - 300 + 30;
                 this.stars[1].x = this.cameras.main.scrollX + chosenScreenX/2 + 30;
                 this.stars[2].x = this.cameras.main.scrollX + chosenScreenX/2 + 300 + 30;
                 this.stars[0].setScale(4 * scale);
                 this.stars[1].setScale(5.25 * scale);
                 this.stars[2].setScale(4 * scale);
-                if (this.ball.x < 4000 + 1100) {
+                if (this.ball.x < 10000 + 1100) {
                     this.stars[2].setTint(0x777777);
                 }
-                if (this.ball.x < 3000 + 1100) {
+                if (this.ball.x < 7500 + 1100) {
                     this.stars[1].setTint(0x777777);
                 }
                 this.add.text(this.cameras.main.scrollX + 250, 650, `${Math.floor(this.ball.x - 1100)} Centimeters!`, {fontFamily: "Shadows Into Light", fontSize: '100px'});
@@ -184,7 +185,7 @@ class Level1 extends Phaser.Scene {
         if (followBall) {
             this.cameras.main.scrollX = this.ball.x - chosenScreenX * 3/8 - 200;
         }
-        if (this.ball.x >= 2000 + 1100 && this.homerun == null) {
+        if (this.ball.x >= 5000 + 1100 && this.homerun == null) {
             this.homerun = this.add.text(this.cameras.main.scrollX - 100, 100, 'HOME RUN!', {fontFamily: "Gill Sans MT", fontStyle: 'bold', fontSize: '165px'});
         }
         if (this.homerun != null) {

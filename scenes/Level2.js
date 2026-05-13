@@ -69,23 +69,23 @@ class Level2 extends Phaser.Scene {
         .setScale(0.5 * scale)
         .setTint(0xf0f0ff)
         .setCircle(radius['hand'], {ignoreGravity: true, collisionFilter: {category: 0x0100, mask: 0x0100}, mass: 5})
-        this.pencil = this.matter.add.image(arm_x, arm_y, 'pencil')
+        this.pencil = this.matter.add.image(arm_x -500, arm_y, 'pencil')
         .setScale(1 * scale)
         .setTint(0xf0f0ff)
-        .setRectangle(width['pencil'], length['pencil'], {slop: 0, ignoreGravity: true, collisionFilter: {category: 0x0100, mask: 0x1100}, mass: 5, pointA: {y: 1000}});
+        .setRectangle(width['pencil'], length['pencil'], {slop: 0, ignoreGravity: true, collisionFilter: {category: 0x0100, mask: 0x1100}, mass: 0.1, pointA: {y: 1000}});
 
         // pencil tip
         this.tip = this.matter.add.image(arm_x, arm_y, 'pencil')
         .setScale(0.0001 * scale)
         .setTint(0x000000)
-        .setCircle(radius['tip'], {ignoreGravity: true, collisionFilter: {category: 0x1100, mask: 0x1100}});
+        .setCircle(radius['tip'], {ignoreGravity: true, collisionFilter: {category: 0x1100, mask: 0x1100, mass: 0.1}});
 
         // constraints
         this.constraint0 = this.matter.add.constraint(this.joint0, this.bone0, radius['joint0'], stiff_val, {pointB: {x: 0, y: length['bone0']/2 - slop_val}});
         this.constraint1 = this.matter.add.constraint(this.bone0, this.joint1, radius['joint1'], stiff_val, {pointA: {x: 0, y: -length['bone0']/2 + slop_val}});
         this.constraint2 = this.matter.add.constraint(this.joint1, this.bone1, radius['joint1'], stiff_val, {pointB: {x: 0, y: length['bone1']/2 - slop_val}});
         this.constraint3 = this.matter.add.constraint(this.bone1, this.hand, radius['hand'], stiff_val, {pointA: {x: 0, y: -length['bone1']/2 + slop_val}});
-        this.constraint4 = this.matter.add.worldConstraint(this.hand, 0, loose_val, {pointA: {x: 500, y: 750}});
+        this.constraint4 = this.matter.add.worldConstraint(this.hand, 0, loose_val, {pointA: {x: 500, y: chosenScreenY - 300}});
         this.constraint5 = this.matter.add.constraint(this.hand, this.pencil, radius['hand'], stiff_val, {pointB: {x: 0, y: length['pencil']/2 - slop_val}});
         this.constraint6 = this.matter.add.constraint(this.pencil, this.tip, radius['tip'], stiff_val, {pointA: {x: 0, y: -length['pencil']/2 + slop_val}});
         this.constraint7 = this.matter.add.worldConstraint(this.tip, 0, loose_val/5, {pointA: {x: chosenScreenX/2, y: 0}});
@@ -111,7 +111,7 @@ class Level2 extends Phaser.Scene {
         this.trackpad.on('pointermove', (pointer) =>
         {
             this.constraint4.pointA.x = (pointer.x - 75) * 1.15;
-            this.constraint4.pointA.y = (pointer.y - 1920*6/8) * 3.5;
+            this.constraint4.pointA.y = (pointer.y - 1920*6/8) * 4;
             this.constraint7.pointA.x = this.constraint4.pointA.x;
 
             // drawing
@@ -162,11 +162,11 @@ class Level2 extends Phaser.Scene {
         });
         this.next.on('pointerup', () =>
         {
-            this.scene.start('lvl2');
+            this.scene.start('win');
         });
         this.exit.on('pointerup', () =>
         {
-            this.scene.restart();
+            this.scene.start('lvlselect');
         });
         
         // filters
@@ -211,10 +211,14 @@ class Level2 extends Phaser.Scene {
             this.next.y = 600;
             this.exit.x = 450;
             this.exit.y = 800;
+            this.title.setTint(0xffffff);
             this.matter.world.pause();
         }
         else {
             this.title.text = `Catch the Stars.\n${Math.floor(11 - (time - this.since_fall_offset_offset) / 1000)}`
+            if (Math.floor(11 - (time - this.since_fall_offset_offset) / 1000) < 0) {
+                this.title.setTint(0xff0000);
+            }
         }
         if (this.since_fall_offset >= 10000) {
             this.since_fall = 0;

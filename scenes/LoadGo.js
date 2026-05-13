@@ -92,9 +92,6 @@ class LoadGo extends Phaser.Scene {
     }
 
     update(time) {
-        if (this.loadingDone) {
-            this.scene.start('lvl2');
-        }
         if ((time/1000 > 5.5 || Phaser.Input.Keyboard.JustDown(this.skip)) && this.loadingDone) {
             this.scene.start('lvl0');
         }
