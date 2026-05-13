@@ -65,9 +65,9 @@ class Level2 extends Phaser.Scene {
 
         // stars
         this.stars = [];
-        this.stars[0] = this.matter.add.image(3000, 500, 'star')
-        this.stars[1] = this.matter.add.image(4000, 500, 'star')
-        this.stars[2] = this.matter.add.image(5000, 500, 'star')
+        this.stars[0] = this.matter.add.image(3000 + 1100, 500, 'star')
+        this.stars[1] = this.matter.add.image(4000 + 1100, 500, 'star')
+        this.stars[2] = this.matter.add.image(5000 + 1100, 500, 'star')
         for (let i = 0; i < 3; i++) {
             this.stars[i]
                 .setScale(3 * scale)
@@ -83,24 +83,6 @@ class Level2 extends Phaser.Scene {
             .setCollidesWith(0x0100)
             .setMass(0.0000001)
             .setScale(0.5);
-
-        this.ball.setOn (this.stars, (instance) =>
-            {
-                this.tweens.add({
-                    targets: instance.gameObject,
-                    angle: 360 * 2,
-                    alpha: 0,
-                    scale: 1.5,
-                    duration: 1000,
-                    //ease: 'Quart.easeIn',
-                    onComplete: () =>
-                    {
-                        if (instance.gameObject != null) {
-                            instance.gameObject.destroy();
-                        }
-                    }
-                });
-            });
 
         this.ball.setOnCollideWith(this.bat, () =>
             {
@@ -133,7 +115,7 @@ class Level2 extends Phaser.Scene {
             if (followBall) {
                 followBall = false;
                 console.log(`${Math.floor(this.ball.x - 1100)} centimeters`);
-                //this.scene.restart();
+                this.scene.restart();
             }
             this.ball.y = -100;
             this.ball.x = 600;
