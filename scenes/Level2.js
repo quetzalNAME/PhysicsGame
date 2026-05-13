@@ -114,7 +114,7 @@ class Level2 extends Phaser.Scene {
         if (this.ball.y > chosenScreenY + 100) {
             if (followBall) {
                 followBall = false;
-                console.log(`${Math.floor(this.ball.x - 1100)} centimeters`);
+                console.log(`${Math.floor(this.ball.x - 1100)} centimeters!`);
                 this.scene.restart();
             }
             this.ball.y = -100;
