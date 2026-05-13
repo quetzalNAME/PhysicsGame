@@ -21,10 +21,11 @@ class LoadGo extends Phaser.Scene {
         this.load.image('bone0', 'bone0.png');
         this.load.image('bone1', 'bone1.png');
         this.load.image('hand', 'hand.png');
+        this.load.image('star', 'star.png');
         this.load.image('crumple', 'crumple.png');
         this.load.image('bat', 'bat.png');
-        this.load.image('star', 'star.png')
-        .start();
+        this.load.image('pencil', 'pencil.png');
+        this.load.start();
 
         let logoScale = 0.7;
         let logoOffsetX = 0;
@@ -91,9 +92,9 @@ class LoadGo extends Phaser.Scene {
     }
 
     update(time) {
-        // if (this.loadingDone) {
-        //     this.scene.start('lvl0');
-        // }
+        if (this.loadingDone) {
+            this.scene.start('lvl2');
+        }
         if ((time/1000 > 5.5 || Phaser.Input.Keyboard.JustDown(this.skip)) && this.loadingDone) {
             this.scene.start('lvl0');
         }

@@ -8,9 +8,9 @@ class Level0 extends Phaser.Scene {
 
         // background
         this.bg = this.add.image(chosenScreenX/2, chosenScreenY/2 - 250, 'bg')
-        .setScale(0.32)
-        .setTint(0x505070)
-        .setAlpha(0.5);
+            .setScale(0.32)
+            .setTint(0x505070)
+            .setAlpha(0.5);
 
         // text
         this.add.text(75, 50, 'Collect the stars.', {fontFamily: "Shadows Into Light", fontSize: '150px'});
@@ -52,9 +52,9 @@ class Level0 extends Phaser.Scene {
 
         // hand + bat (segment2)
         this.hand = this.matter.add.image(arm_x, arm_y, 'hand')
-        .setScale(0.5 * scale)
-        .setTint(0xf0f0ff)
-        .setCircle(radius['hand'], {ignoreGravity: true, collisionFilter: {category: 0x0100, mask: 0x0101}, mass: 5})
+            .setScale(0.5 * scale)
+            .setTint(0xf0f0ff)
+            .setCircle(radius['hand'], {ignoreGravity: true, collisionFilter: {category: 0x0100, mask: 0x0101}, mass: 5});
 
         // constraints
         this.constraint0 = this.matter.add.constraint(this.joint0, this.bone0, radius['joint0'], stiff_val, {pointB: {x: 0, y: length['bone0']/2 - slop_val}});
@@ -108,26 +108,20 @@ class Level0 extends Phaser.Scene {
             this.constraint4.pointA.y = (pointer.y - 1920*6/8) * 3.5;
         });
 
-        // text
+        // end text
         this.retry = this.add.text(-9000, arm_y - radius['joint0'], 'Retry', {fontFamily: "Shadows Into Light", fontSize: '150px'}).setInteractive();
         this.next = this.add.text(-9000, arm_y - radius['joint0'], 'Next', {fontFamily: "Shadows Into Light", fontSize: '150px'}).setInteractive();
         this.exit = this.add.text(-9000, arm_y + 150, 'Exit', {fontFamily: "Shadows Into Light", fontSize: '150px'}).setInteractive();
         this.retry.on('pointerup', () =>
         {
-            this.homerun = null;
-            followBall = false;
             this.scene.restart();
         });
         this.next.on('pointerup', () =>
         {
-            this.homerun = null;
-            followBall = false;
             this.scene.start('lvl1');
         });
         this.exit.on('pointerup', () =>
         {
-            this.homerun = null;
-            followBall = false;
             this.scene.restart();
         });
         

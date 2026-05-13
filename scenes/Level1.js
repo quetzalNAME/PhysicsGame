@@ -111,7 +111,7 @@ class Level1 extends Phaser.Scene {
             this.constraint4.pointA.y = (pointer.y - 1920*6/8) * 3.5;
         });
         
-        // text
+        // end text
         this.retry = this.add.text(-9000, 900, 'Retry', {fontFamily: "Shadows Into Light", fontSize: '150px'}).setInteractive();
         this.next = this.add.text(-9000, 1200, 'Next', {fontFamily: "Shadows Into Light", fontSize: '150px'}).setInteractive();
         this.exit = this.add.text(-9000, 1500, 'Exit', {fontFamily: "Shadows Into Light", fontSize: '150px'}).setInteractive();
@@ -125,7 +125,7 @@ class Level1 extends Phaser.Scene {
         {
             this.homerun = null;
             followBall = false;
-            this.scene.start('lvl1');
+            this.scene.start('lvl2');
         });
         this.exit.on('pointerup', () =>
         {
