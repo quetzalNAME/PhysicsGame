@@ -12,6 +12,7 @@ class LoadGo extends Phaser.Scene {
         // this happens while the logo is playing
         this.loadingDone = false;
         this.load.image('bg', 'bg.jpg');
+        this.load.image('trackpad', 'trackpad.png');
         this.load.image('joint0', 'joint0.png');
         this.load.image('joint1', 'joint1.png');
         this.load.image('bone0', 'bone0.png');
@@ -89,7 +90,7 @@ class LoadGo extends Phaser.Scene {
 
     update(time) {
         if (this.loadingDone) {
-            this.scene.start('lvl1');
+            this.scene.start('lvl2');
         }
         if ((time/1000 > 5.5 || Phaser.Input.Keyboard.JustDown(this.skip)) && this.loadingDone) {
             this.scene.start('lvl1');

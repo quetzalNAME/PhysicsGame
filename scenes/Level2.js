@@ -1,6 +1,6 @@
-class Level1 extends Phaser.Scene {
+class Level2 extends Phaser.Scene {
     constructor() {
-        super('lvl1');
+        super('lvl2');
     }
     create () {
         // world bounds
@@ -8,12 +8,17 @@ class Level1 extends Phaser.Scene {
 
         // background
         this.bg = this.add.image(chosenScreenX/2, chosenScreenY/2 - 250, 'bg')
-        .setScale(0.32)
-        .setTint(0x505070)
-        .setAlpha(0.5);
+            .setScale(0.32, 0.6)
+            .setTint(0x505070)
+            .setAlpha(0.5);
 
-        // floor / control zone
-        this.floor = this.add.rectangle(1080/2, 1920*7/8, 1080, 500, 0x404040, 1).setInteractive();
+        // control zone
+        this.trackpad = this.add.image(chosenScreenX/2, chosenScreenY*7/8 - 15, 'trackpad')
+            .setScale(2.75 *3/4, 1.75 *3/4)
+            .setTint(0xeaf0ff)
+            .setInteractive();
+
+        // floor
         let rect = this.matter.add.rectangle(1080/2, 1920*7/8, 1080, 500, {isStatic: true});
 
         // variables
@@ -66,7 +71,7 @@ class Level1 extends Phaser.Scene {
         this.constraint5 = this.matter.add.constraint(this.hand, this.bat, 0, stiff_val, {pointB: {x: 0, y: length['bat']/2 - slop_val}});
 
         // hand movement
-        this.floor.on('pointermove', (pointer) =>
+        this.trackpad.on('pointermove', (pointer) =>
         {
             this.constraint4.pointA.x = (pointer.x - 75) * 1.15;
             this.constraint4.pointA.y = (pointer.y - 1920*6/8) * 3.5;
@@ -74,13 +79,13 @@ class Level1 extends Phaser.Scene {
 
         // stars
         this.stars = [];
-        for (let i = 0; i < 30; i++) {
-            this.stars[i] = this.matter.add.image(300, 300, 'star')
-            .setScale(1.5 * scale)
-            .setCircle()
-            .setMass(0.0001)
-            .setTint(0xffff70);
-        }
+        // for (let i = 0; i < 30; i++) {
+        //     this.stars[i] = this.matter.add.image(300, 300, 'star')
+        //     .setScale(1.5 * scale)
+        //     .setCircle()
+        //     .setMass(0.0001)
+        //     .setTint(0xffff70);
+        // }
         this.hand.setOnCollideWith(this.stars, (instance) =>
             {
                 this.tweens.add({
