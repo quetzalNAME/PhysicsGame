@@ -27,6 +27,9 @@ class LoadGo extends Phaser.Scene {
         this.load.image('pencil', 'pencil.png');
         this.load.start();
 
+        // get browser to load in font for future scenes
+        this.add.text(-9000, 300, 'E', {fontFamily: "Shadows Into Light", fontSize: '140px', align: 'center'});
+
         let logoScale = 0.7;
         let logoOffsetX = 0;
 
