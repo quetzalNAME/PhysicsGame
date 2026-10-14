@@ -72,24 +72,24 @@ class Level0 extends Phaser.Scene {
 
         // variables
         let arm_x = chosenScreenX/2;
-        let arm_y = chosenScreenY/2;
+        let arm_y = chosenScreenY*3.5/8;
         let scale = 0.75; // scale effects everything without changing proportions
 
         // build the arm
         this.buildArm(arm_x, arm_y, scale);
 
         // floor
-        this.floor = this.add.rectangle(chosenScreenX/2, chosenScreenY*7/8, chosenScreenX, chosenScreenY*2/8, 0x303050, 1);
+        this.floor = this.add.rectangle(chosenScreenX/2, chosenScreenY*6.75/8, chosenScreenX, chosenScreenY*2.5/8, 0x303050, 1);
         let floor_hitbox = this.matter.add.rectangle(this.floor.x, this.floor.y, this.floor.width, this.floor.height, {isStatic: true});
 
         // stars
         this.stars = [];
-        this.stars[0] = this.matter.add.image(0, chosenScreenY*3/8, 'star');
-        this.stars[1] = this.matter.add.image(chosenScreenX/2, chosenScreenY*4.5/8, 'star')
-        this.stars[2] = this.matter.add.image(chosenScreenX, chosenScreenY*3/8, 'star')
+        this.stars[0] = this.matter.add.image(75, chosenScreenY*3/8, 'star');
+        this.stars[1] = this.matter.add.image(chosenScreenX/2, chosenScreenY*5.5/8, 'star')
+        this.stars[2] = this.matter.add.image(chosenScreenX - 75, chosenScreenY*3/8, 'star')
         for (let i = 0; i < 3; i++) {
             this.stars[i]
-            .setScale(1.75 * scale)
+            .setScale(2 * scale)
             .setCircle()
             .setIgnoreGravity(true)
             .setTint(starYellow);
@@ -114,8 +114,8 @@ class Level0 extends Phaser.Scene {
         this.stars_collected = 0;
 
         // control zone
-        this.trackpad = this.add.image(chosenScreenX/2, chosenScreenY*7/8, 'trackpad')
-            .setScale(2.75 * 3/4, 3/2)
+        this.trackpad = this.add.image(chosenScreenX/2, chosenScreenY*6.75/8, 'trackpad')
+            .setScale(2.75 * 3/4, 2.75 * 3/4)
             .setTint(0xeaf0ff)
             .setInteractive();
 
@@ -125,7 +125,7 @@ class Level0 extends Phaser.Scene {
             // x is mostly the same but constraint can be partially offscreen
             this.constraint4.pointA.x = (pointer.x - 75) * 1.15;
             // y is translated to the portion of the screen that isnt the trackpad
-            this.constraint4.pointA.y = (pointer.y - chosenScreenY*6.5/8) * 5;
+            this.constraint4.pointA.y = (pointer.y - chosenScreenY*5.75/8) * 2.75;
             this.cursor.x = this.constraint4.pointA.x;
             this.cursor.y = this.constraint4.pointA.y;
         });
