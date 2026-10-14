@@ -6,7 +6,7 @@ let config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: 1080,
-        height: 1920
+        height: 2400
     },
     physics: {
         default: 'matter',

@@ -41,20 +41,20 @@ class LoadGo extends Phaser.Scene {
 
         this.bg = this.add.rectangle(0, 0, chosenScreenX * 2, chosenScreenY * 2, 0xffffff, 1);
 
-        this.logo = this.add.image(-(chosenScreenX/2), chosenScreenY*3/8, 'logo');
+        this.logo = this.add.image(-(chosenScreenX/2), chosenScreenY*3.5/8, 'logo');
         this.logo.setScale(logoScale);
 
         this.tweens.add({
             targets: this.logo,
             x: chosenScreenX/2 - logoOffsetX,
-            y: chosenScreenY*3/8,
+            y: chosenScreenY*3.5/8,
             duration: 1250,
             ease: 'Quart.easeInOut',
         });
 
         this.tagline = this.add.text(
             offscreen,
-            chosenScreenY*3/8,
+            chosenScreenY*3.75/8,
             "Bad Tagline, Good Games",
             {fontFamily: "Gill Sans MT", fontWeight: "bold", fontSize: "50px", color: "#000000"}
         );
@@ -68,7 +68,7 @@ class LoadGo extends Phaser.Scene {
 
         this.tweens.add({
             targets: this.tagline,
-            y: chosenScreenY*3/8 + this.logo.height/3,
+            y: chosenScreenY*3.5/8 + this.logo.height/3,
             alpha: 1,
             delay: 1500,
             duration: 350,
