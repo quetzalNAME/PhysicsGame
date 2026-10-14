@@ -150,10 +150,10 @@ class Level1 extends Phaser.Scene {
                 this.stars[1].setScale(5.25 * scale);
                 this.stars[2].setScale(4 * scale);
                 if (this.ball.x < 10000 + 1100) {
-                    this.stars[2].setTint(0x777777);
+                    this.stars[2].setTint(starEmpty);
                 }
                 if (this.ball.x < 7500 + 1100) {
-                    this.stars[1].setTint(0x777777);
+                    this.stars[1].setTint(starEmpty);
                 }
                 this.add.text(this.cameras.main.scrollX + 250, 650, `${Math.floor(this.ball.x - 1100)} Centimeters!`, {fontFamily: "Shadows Into Light", fontSize: '100px'});
                 this.retry.x = this.cameras.main.scrollX + 425;
